@@ -25,7 +25,8 @@ unsigned long timeOfoneRevolution() {
     return timeAfterOneRevolution - timeStart;
 }
 
-declare a function averageSpeed() that returns a double {
+double averageSpeed() {
+  
     call the function timeOfOneRevolution() ten times and accumulate all ten readings in a double variable
     calculate the average speed by using the total time accumulated and the circumference of the wheel
     return the average speed in meters per second
@@ -33,4 +34,6 @@ declare a function averageSpeed() that returns a double {
 
 
 void loop() {
-    print the result of averageSpeed() and the units m/s
+    print(averagespeed());
+    print("m/s")
+    println("");
