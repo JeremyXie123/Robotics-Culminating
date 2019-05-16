@@ -1,11 +1,13 @@
 #define ENCODER 2       // digital input to arduino from encoder; the Vcc and GND of encoder must be plugged into the arduino
-
-define SPOKES_IN_ENCODER to 20
+#define SPOKES_IN_ENCODER 20
+#define RADIUS 10
+#define CIRCUMFERENCE 2*PI*RADIUS
+#define Iterations 10
 
 void setup() {
-    set pin mode of LED_BUILTIN to OUTPUT
-    set pin mode of ENCODER to INPUT
-    initialize the serial monitor to 9600 bits per second (baud rate)
+    pinMode(LED_BUILTIN, INPUT);
+    pinMode(ENCODER, INPUT);
+    Serial.begin(9600);
 }
 
 // this function calculates the time it takes for the wheel to turn once
@@ -26,14 +28,18 @@ unsigned long timeOfoneRevolution() {
 }
 
 double averageSpeed() {
-  
-    call the function timeOfOneRevolution() ten times and accumulate all ten readings in a double variable
-    calculate the average speed by using the total time accumulated and the circumference of the wheel
-    return the average speed in meters per second
+    double totalTime = 0;
+    int i;
+    for (i = 0; i <= Iterations; i++) {
+    totalTime += timeOfoneRevolution();
+    } 
+    int totalDist = Iterations*CIRCUMFERENCE;
+    return totalDist/totalTime;
 }
 
 
 void loop() {
-    print(averagespeed());
-    print("m/s")
-    println("");
+    Serial.print(averageSpeed());
+    Serial.print("m/s");
+    Serial.println("");
+}

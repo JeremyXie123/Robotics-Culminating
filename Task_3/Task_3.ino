@@ -1,5 +1,7 @@
-#define ENCODER 2	// digital input to arduino from encoder; the Vcc and GND of encoder must be plugged into the arduino
+#define ENCODER 2       // digital input to arduino from encoder; the Vcc and GND of encoder must be plugged into the arduino
 #define SPOKES_IN_ENCODER 20
+#define RADIUS 10
+#define CIRCUMFERENCE 2*PI*RADIUS
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -27,5 +29,9 @@ unsigned long timeOfoneRevolution() {
 
 
 void loop() {
-    Serial.println(timeOfoneRevolution());
+    rotationTime = timeOfoneRevolution()
+    Serial.print("Time spent: ")
+    Serial.print(rotationTime);
+    Serial.print("Speed: ")
+    Serial.print(CIRCUMFERENCE/rotationTime) 
 }
