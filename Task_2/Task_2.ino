@@ -3,7 +3,7 @@
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(ENCODER, OUTPUT);
+  pinMode(ENCODER, INPUT);
   Serial.begin(9600);  
 }
 
@@ -16,6 +16,7 @@ void oneRevolution() {
         do {
         } while (value == digitalRead(ENCODER));
         reads = reads + 1;
+        //Serial.print(reads);
     } while (reads!=2*SPOKES_IN_ENCODER);
 
     Serial.print(reads);

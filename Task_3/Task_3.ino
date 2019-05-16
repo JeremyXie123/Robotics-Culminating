@@ -3,7 +3,7 @@
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(ENCODER, OUTPUT);
+  pinMode(ENCODER, INPUT);
   Serial.begin(9600);  
 }
 
@@ -27,5 +27,5 @@ unsigned long timeOfoneRevolution() {
 
 
 void loop() {
-    timeOfoneRevolution;
+    Serial.println(timeOfoneRevolution());
 }
