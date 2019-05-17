@@ -29,9 +29,9 @@ unsigned long timeOfoneRevolution() {
 
 
 void loop() {
-    rotationTime = timeOfoneRevolution()
-    Serial.print("Time spent: ")
+    unsigned long rotationTime = timeOfoneRevolution();
+    Serial.print("Time spent: ");
     Serial.print(rotationTime);
-    Serial.print("Speed: ")
-    Serial.print(CIRCUMFERENCE/rotationTime) 
+    Serial.print("Speed: ");
+    Serial.print(CIRCUMFERENCE/rotationTime); 
 }
