@@ -1,7 +1,8 @@
 #define ENCODER 2       // digital input to arduino from encoder; the Vcc and GND of encoder must be plugged into the arduino
 #define SPOKES_IN_ENCODER 20
-#define RADIUS 10
-#define CIRCUMFERENCE 2*PI*RADIUS
+#define RADIUS 3.2
+//#define CIRCUMFERENCE 2*PI*RADIUS
+#define CIRCUMFERENCE 6.35*PI
 #define Iterations 10
 
 void setup() {
@@ -27,19 +28,22 @@ unsigned long timeOfoneRevolution() {
     return timeAfterOneRevolution - timeStart;
 }
 
-double averageSpeed() {
-    double totalTime = 0;
+double averageTime() {
+    unsigned long totalTime = 0;
     int i;
     for (i = 0; i <= Iterations; i++) {
-    totalTime += timeOfoneRevolution();
+    totalTime = totalTime + timeOfoneRevolution();
     } 
-    int totalDist = Iterations*CIRCUMFERENCE;
-    return totalDist/totalTime;
+    return totalTime;
+    //RETURNS CM/MS
 }
 
 
 void loop() {
-    Serial.print(averageSpeed());
-    Serial.print("m/s");
-    Serial.println("");
+    double rotationTime = averageTime();
+    Serial.print("Time spent: ");
+    Serial.print(rotationTime);
+    Serial.print("ms Speed: ");
+    Serial.print(10*CIRCUMFERENCE/rotationTime*1000/100); 
+    Serial.print("m/s \n");
 }
