@@ -47,3 +47,12 @@ void loop() {
     Serial.print(10*CIRCUMFERENCE/rotationTime*1000/100); 
     Serial.print("m/s \n");
 }
+
+//Get Speed of wheel 1 as X
+//Get Speed of wheel 2 as Y
+//find the ratio by dividing 1 by 2
+//let A = X/Y
+//scale 2 such that the speeds are the same
+//let B = 1/A
+//Apply equalization force
+//Y*A
