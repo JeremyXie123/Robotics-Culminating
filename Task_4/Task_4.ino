@@ -28,22 +28,20 @@ unsigned long timeOfoneRevolution() {
     return timeAfterOneRevolution - timeStart;
 }
 
-double averageTime() {
+double averageSpeed() {
     unsigned long totalTime = 0;
     int i;
-    for (i = 0; i <= Iterations; i++) {
+    for (i = 0; i < Iterations; i++) {
     totalTime = totalTime + timeOfoneRevolution();
     } 
-    return totalTime;
+    return 10*CIRCUMFERENCE/totalTime;
     //RETURNS CM/MS
 }
 
 
 void loop() {
-    double rotationTime = averageTime();
-    Serial.print("Time spent: ");
-    Serial.print(rotationTime);
-    Serial.print("ms Speed: ");
-    Serial.print(10*CIRCUMFERENCE/rotationTime*1000/100); 
+    double SPEED = averageSpeed();
+    Serial.print("Speed: ");
+    Serial.print(SPEED*10); 
     Serial.print("m/s \n");
 }

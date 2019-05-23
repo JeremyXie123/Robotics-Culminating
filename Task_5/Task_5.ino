@@ -1,9 +1,16 @@
 #define ENCODER 2       // digital input to arduino from encoder; the Vcc and GND of encoder must be plugged into the arduino
+//#define ENCODER2 3
 #define SPOKES_IN_ENCODER 20
 #define RADIUS 3.2
 //#define CIRCUMFERENCE 2*PI*RADIUS
 #define CIRCUMFERENCE 6.35*PI
 #define Iterations 10
+
+#define SPEED_MOTOR_1 0.58
+#define SPEED_MOTOR_2 0.59
+#define SPEED_RATIO_1_2 SPEED_MOTOR_1/SPEED_MOTOR_2
+
+
 
 void setup() {
     pinMode(LED_BUILTIN, INPUT);
@@ -28,31 +35,20 @@ unsigned long timeOfoneRevolution() {
     return timeAfterOneRevolution - timeStart;
 }
 
-double averageTime() {
+double averageSpeed() {
     unsigned long totalTime = 0;
     int i;
-    for (i = 0; i <= Iterations; i++) {
+    for (i = 0; i < Iterations; i++) {
     totalTime = totalTime + timeOfoneRevolution();
     } 
-    return totalTime;
+    return 10*CIRCUMFERENCE/totalTime;
     //RETURNS CM/MS
 }
 
 
 void loop() {
-    double rotationTime = averageTime();
-    Serial.print("Time spent: ");
-    Serial.print(rotationTime);
-    Serial.print("ms Speed: ");
-    Serial.print(10*CIRCUMFERENCE/rotationTime*1000/100); 
+    double SPEED = averageSpeed();
+    Serial.print("Speed: ");
+    Serial.print(SPEED*10,6); 
     Serial.print("m/s \n");
 }
-
-//Get Speed of wheel 1 as X
-//Get Speed of wheel 2 as Y
-//find the ratio by dividing 1 by 2
-//let A = X/Y
-//scale 2 such that the speeds are the same
-//let B = 1/A
-//Apply equalization force
-//Y*A
